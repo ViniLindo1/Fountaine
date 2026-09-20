@@ -1,0 +1,56 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 15 de jun. de 2026, 13:58:45
+    Author     : vinic
+*/
+body{
+   background: #9d8663;
+   background-size: 100%;
+}
+
+h1{
+    color: #141470;
+    font-size: 32px;
+    font-family: "Saira", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:"wdth" 100;
+}
+h6{
+    color: #144270;
+    font-size: 18px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings:"wdth" 100;
+}
+
+section{
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
+
+a{
+    text-decoration: none;
+}
+h4{
+    color: #147070;
+    font-size: 24px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 800;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+}
+

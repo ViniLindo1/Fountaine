@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+:root {
+    --fundo: #fcfaf8;
+    --marrom: #8b6644;
+    --marrom-escuro: #755436;
+    --titulo: #7a6c58;
+    --texto-suave: #9d8663;
+    --borda: #e4dcd0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Layout pensado para celular: Samsung Galaxy S25 FE = 412px de largura (CSS px) */
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    max-width: 412px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 0;
+    background: var(--fundo);
+    font-family: "Lato", "Roboto", sans-serif;
+}
+
+/* ---------- Grade: 2 colunas (cada card ~182px no S25 FE) ---------- */
+.produtos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 1fr;          /* todas as linhas com a mesma altura */
+    gap: 28px 16px;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 16px;
+}
+
+/* ---------- Card do produto ---------- */
+form,
+.produtos form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    margin: 0;
+    object-fit: cover;
+    background: #e5e3df;
+}
+
+/* nome */
+h2 {
+    margin: 14px 0 6px;
+    color: var(--titulo);
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+    height: 60px;                 /* 2 linhas x 20px, sempre */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;        /* passou de 2 linhas vira "…" */
+    -webkit-box-orient: vertical;
+}
+
+/* preço */
+h6 {
+    margin: 0 0 10px;
+    color: var(--marrom);
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: 19px;
+    font-weight: 400;
+    opacity: 1;
+}
+
+/* mensagem de erro da quantidade: aparece por cima da imagem,
+   assim não muda a altura do card (a cor vermelha vem do style inline do servlet) */
+h5 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 8px 10px;
+    background: rgba(252, 250, 248, 0.95);
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+h5:empty {
+    display: none;
+}
+
+/* ---------- Estoque + quantidade ---------- */
+.estoque {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    margin: 0 0 12px;
+}
+
+p {
+    margin: 0;
+    color: var(--texto-suave);
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 1;
+}
+
+input[type=number] {
+    width: 56px;
+    height: 38px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--borda);
+    border-radius: 4px;
+    background: #fff;
+    color: #5a4630;
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    outline: none;
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+input[type=number]:focus {
+    border-color: var(--marrom);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* ---------- Botão de compra ---------- */
+.compras {
+    width: 100%;
+    height: 48px;
+    margin: auto 0 0;             /* empurra o botão para o fim do card */
+    border: none;
+    border-radius: 2px;
+    background: var(--marrom);
+    color: #fff;
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.compras:hover:not(:disabled) {
+    background: var(--marrom-escuro);
+}
+
+.compras:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}

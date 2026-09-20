@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="CSS/Cadastro.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href=\"https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap\" rel=\"stylesheet\">
+        <script type="text/javascript">
+            function buscarCEP() {
+                let cep = document.getElementById("idCEP").value;
+
+                // Remove caracteres não numéricos
+                cep = cep.replace(/\D/g, '');
+
+                fetch("https://viacep.com.br/ws/" + cep + "/json/")
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("Erro na requisição");
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            // Verifica se o CEP existe
+                            if (data.erro) {
+                                alert("CEP não encontrado!");
+                                document.getElementById("idRua").value="";
+                            } else
+                            {
+                                document.getElementById("idDiv").innerHTML = JSON.stringify(data);
+                                document.getElementById("idRua").value = data.logradouro;
+                                document.getElementById("idBairro").value = data.bairro;
+                                document.getElementById("idCidade").value = data.localidade;
+                            }
+                        })
+                        .catch(error => {
+                            alert("Erro: " + error.message);
+                        });
+            }
+            
+            function PreencherCampos() {
+                let codigo=document.getElementById("idCodigo").value;
+                fetch("Buscar?codigo="+codigo, {
+                    method: 'GET',
+                    //headers,
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    //body: JSON.stringify(dados)
+                })
+                        .then(response => response.json())
+                        .then(dados => {
+                            if(dados.achou){
+                            document.getElementById("idNome").value = dados.nome;
+                            document.getElementById("idUser").value = dados.user;
+                            // Não preenchi a senha por segurança.
+                            document.getElementById("idCidade").value = dados.cidade;
+                            document.getElementById("idBairro").value = dados.bairro;
+                            document.getElementById("idRua").value = dados.rua;
+                            document.getElementById("idNumero").value = dados.numero;
+                            
+                        }
+                        else{
+                            return;
+                        }
+                        })
+                        .catch(error => {
+                            document.getElementById("idNome").value = "Erro ao listar:" + error;
+                        });
+
+            }
+        </script>
+    </head>
+    <body>
+        <nav>
+            <h1> Cadastro </h1>
+        </nav>
+         <form action="Controlador" method="POST">
+
+            
+        <section> 
+
+                
+            <h3>Codigo</h3>   
+                <input placeholder="Codigo" name="codigo" id="idCodigo" onblur="PreencherCampos()" type="text" required>       
+               
+            <h3>Nomeㅤ</h3>
+                <input placeholder="Nome" name="nome" id="idNome" type="text" required>             
+
+            <h3>Userㅤ</h3>
+                <input placeholder="User" name="user" id="idUser" type="text" required>           
+
+            <h3>Senha</h3>
+                <input placeholder="Senha" name="senha"  type="password" required>
+                
+            <h3>CEPㅤ</h3>
+                <input placeholder="CEP" name="CEP" id="idCEP" type="text" onblur="buscarCEP()">
+
+            <h3>Cidade</h3>
+                <input placeholder="Cidade" name="cidade" id="idCidade" type="text" required>
+               
+            <h3>Bairro</h3>
+                <input placeholder="Bairro" name="bairro" id="idBairro" type="text" required>
+
+            <h3>Ruaㅤ</h3>
+                <input placeholder="Rua" name="rua" id="idRua" type="text" required>
+
+            <h3>Numero</h3>
+                <input placeholder="Numero" name="numero" id="idNumero" type="number" required>
+            
+                
+          
+        </section>
+
+        <section>
+
+            <input class="botao" type="submit" value="Cadastrar" name="b1" />
+            <input class="botao" type="submit" value="Alterar" name="b1" />
+            <h6> Já tem uma conta? Faça seu login <a href="Login.html">➜]</a></h6>
+            
+        </section>
+
+    </form>
+        
+        <div id="idDiv" hidden></div>
+        
+    </body>
+</html>

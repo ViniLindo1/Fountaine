@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="CSS/Cadastro.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <script type="text/javascript">
+            function PreencherCampos() {
+                let codigo=document.getElementById("idCodigo").value;
+                fetch("Buscar?codigo="+codigo, {
+                    method: 'GET',
+                    //headers,
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    //body: JSON.stringify(dados)
+                })
+                        .then(response => response.json())
+                        .then(dados => {
+                            if(dados.achou){                          
+                            document.getElementById("idUser").value = dados.user;
+                            // Não preenchi a senha por segurança.
+                        }
+                        else{
+                            return;
+                        }
+                        })
+                        .catch(error => {
+                            document.getElementById("idNome").value = "Erro ao listar:" + error;
+                        });
+
+            }
+        </script>
+    </head>
+    <body>
+        <nav>
+            <h1> Login </h1>
+        </nav>
+
+        <form action="Controlador" method="POST">
+     
+            <section>    
+                <h3>Codigo</h3>   
+                    <input placeholder="Codigo" name="codigo" id="idCodigo" onblur="PreencherCampos()" type="text" required>         
+
+                <h3>Userㅤ</h3>
+                    <input placeholder="User" name="user" id="idUser" type="text" required>           
+
+                <h3>Senha</h3>
+                    <input placeholder="Senha" name="senha"  type="password" required>
+            </section>
+
+            <section>
+
+                
+                <input class="botao" type="submit" value="Logar" name="b1" />
+                <h6> Não tem uma conta? Faça seu cadastro <a href="Cadastro.html">➜]</a></h6>
+
+            </section>
+
+        </form>
+        
+    </body>
+</html>
