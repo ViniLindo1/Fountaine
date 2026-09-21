@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+/* Vitrine responsiva: iPhone, Samsung normal e Samsung Ultra (2 colunas) */
+
+:root {
+    --fundo: #fcfaf8;
+    --marrom: #8b6644;
+    --marrom-escuro: #755436;
+    --titulo: #7a6c58;
+    --texto-suave: #9d8663;
+    --borda: #e4dcd0;
+    --lateral: clamp(12px, 3.9vw, 20px);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    max-width: 480px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 0;
+    background: var(--fundo);
+    font-family: "Lato", "Roboto", sans-serif;
+}
+
+/* ---------- Grade: 2 colunas fluidas ---------- */
+.produtos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+    gap: clamp(20px, 6.8vw, 32px) clamp(10px, 3.9vw, 18px);
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: var(--lateral);
+    padding-left: max(var(--lateral), env(safe-area-inset-left));
+    padding-right: max(var(--lateral), env(safe-area-inset-right));
+    padding-bottom: max(var(--lateral), env(safe-area-inset-bottom));
+}
+
+/* ---------- Card do produto ---------- */
+form,
+.produtos form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    margin: 0;
+    object-fit: cover;
+    background: #e5e3df;
+}
+
+/* nome: sempre 3 linhas de altura, depois vira "…" */
+h2 {
+    margin: 14px 0 6px;
+    color: var(--titulo);
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: clamp(13px, 3.6vw, 16px);
+    font-weight: 400;
+    line-height: 1.35;
+    height: calc(1.35em * 3);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+/* preço */
+h6 {
+    margin: 0 0 10px;
+    color: var(--marrom);
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: clamp(16px, 4.6vw, 20px);
+    font-weight: 400;
+    opacity: 1;
+}
+
+/* mensagem de erro da quantidade (por cima da imagem) */
+h5 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 8px 10px;
+    background: rgba(252, 250, 248, 0.95);
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: clamp(11px, 2.9vw, 13px);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+h5:empty {
+    display: none;
+}
+
+/* ---------- Estoque + quantidade ---------- */
+.estoque {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    margin: 0 0 12px;
+}
+
+p {
+    margin: 0;
+    color: var(--texto-suave);
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: clamp(12px, 3.4vw, 15px);
+    font-weight: 400;
+    opacity: 1;
+}
+
+input[type=number] {
+    width: clamp(48px, 13.6vw, 60px);
+    height: 38px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--borda);
+    border-radius: 4px;
+    background: #fff;
+    color: #5a4630;
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: 16px;            /* 16px evita zoom automático no iPhone */
+    font-weight: 700;
+    text-align: center;
+    outline: none;
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+input[type=number]:focus {
+    border-color: var(--marrom);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* ---------- Botão de compra ---------- */
+.compras {
+    width: 100%;
+    height: 48px;
+    margin: auto 0 0;
+    border: none;
+    border-radius: 2px;
+    background: var(--marrom);
+    color: #fff;
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: clamp(13px, 3.6vw, 16px);
+    font-weight: 400;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.compras:hover:not(:disabled) {
+    background: var(--marrom-escuro);
+}
+
+.compras:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* Samsung pequenos */
+@media (max-width: 374px) {
+    .compras {
+        height: 44px;
+    }
+    .estoque {
+        gap: 4px;
+    }
+}
+
+/* Samsung Ultra / iPhone Pro Max */
+@media (min-width: 412px) {
+    .compras {
+        height: 50px;
+    }
+}

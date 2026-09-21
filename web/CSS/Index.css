@@ -1,0 +1,36 @@
+/* Página principal responsiva (iPhone, Samsung normal e Ultra) */
+
+:root {
+    --altura: clamp(50px, 13.1vw, 60px);   /* igual ao Cabecalho.css */
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    max-width: 480px;
+    margin: 0 auto;
+    background: #fcfaf8;
+}
+
+iframe {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+/* mesma altura do cabeçalho */
+iframe[name="logo"] {
+    height: var(--altura);
+}
+
+/* o resto da tela; 100dvh evita o bug da barra do navegador no iPhone/Samsung */
+iframe[name="produtos"] {
+    height: calc(100vh - var(--altura));
+    height: calc(100dvh - var(--altura));
+}

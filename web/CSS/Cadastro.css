@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+/*
+    Login.html e Cadastro.html (ambos usam este arquivo)
+    Responsivo: iPhone, Samsung normal e Samsung Ultra.
+*/
+
+:root {
+    --fundo: #fcfaf8;
+    --marrom: #8b6644;
+    --marrom-escuro: #755436;
+    --titulo: #7a6647;
+    --label: #5a4630;
+    --texto-suave: #9d8663;
+    --borda: #e4dcd0;
+    --placeholder: #d3c5b0;
+    --lateral: clamp(18px, 5.8vw, 28px);   /* margem lateral fluida */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    max-width: 480px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0 auto;
+    padding: 0 var(--lateral) 40px;
+    padding-left: max(var(--lateral), env(safe-area-inset-left));
+    padding-right: max(var(--lateral), env(safe-area-inset-right));
+    padding-bottom: max(40px, env(safe-area-inset-bottom));
+    background: var(--fundo);
+    font-family: "Lato", "Roboto", sans-serif;
+    color: var(--label);
+}
+
+/* ---------- Título ---------- */
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin: 0;
+    padding: clamp(20px, 7.8vw, 40px) 0 8px;
+}
+
+h1 {
+    margin: 0;
+    color: var(--titulo);
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: clamp(26px, 7.3vw, 32px);
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+/* ---------- Formulário ---------- */
+form {
+    width: 100%;
+    margin: 0;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    margin-bottom: 12px;
+}
+
+section h3 {
+    margin: 18px 0 8px;
+    color: var(--label);
+    font-size: clamp(14px, 3.7vw, 16px);
+    font-weight: 700;
+    opacity: 1;
+}
+
+input {
+    width: 100%;
+    height: 52px;
+    margin: 0;
+    padding: 0 16px;
+    border: 1px solid var(--borda);
+    border-radius: 4px;
+    background: #fff;
+    color: var(--label);
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: 16px;            /* 16px evita o zoom automático do iPhone */
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+input::placeholder {
+    color: var(--placeholder);
+    padding-left: 0;
+}
+
+input:focus {
+    border-color: var(--marrom);
+}
+
+/* ---------- Botões ---------- */
+.botao {
+    width: 100%;
+    height: 52px;
+    margin: 0 0 12px;
+    border: 1px solid var(--marrom);
+    border-radius: 4px;
+    background: var(--marrom);
+    color: #fff;
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: clamp(16px, 4.4vw, 18px);
+    font-weight: 400;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.botao:hover {
+    background: var(--marrom-escuro);
+}
+
+.botao[value="Alterar"] {
+    background: transparent;
+    color: var(--marrom);
+    font-weight: 700;
+}
+
+.botao[value="Alterar"]:hover {
+    background: rgba(139, 102, 68, 0.08);
+}
+
+/* ---------- Link de troca de tela ---------- */
+section h6 {
+    margin: 16px 0 0;
+    color: var(--texto-suave);
+    font-size: clamp(14px, 3.7vw, 15px);
+    font-weight: 400;
+    text-align: center;
+    opacity: 1;
+}
+
+a {
+    color: var(--marrom);
+    font-size: clamp(14px, 3.7vw, 15px);
+    font-weight: 700;
+    text-decoration: underline;
+    opacity: 1;
+}
+
+input[type=number] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Samsung pequenos */
+@media (max-width: 374px) {
+    input,
+    .botao {
+        height: 48px;
+    }
+}
+
+/* Telas altas (Ultra / Pro Max): mais respiro no topo */
+@media (min-width: 412px) and (min-height: 800px) {
+    nav {
+        padding-top: 48px;
+    }
+}

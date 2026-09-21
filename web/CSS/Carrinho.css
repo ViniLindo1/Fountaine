@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:ital,wght@1,400;1,500&display=swap');
+
+/* Carrinho responsivo: iPhone, Samsung normal e Samsung Ultra */
+
+:root {
+    --fundo: #fcfaf8;
+    --barra: #f7f3ee;
+    --marrom: #8b6644;
+    --marrom-escuro: #755436;
+    --tan: #9c8563;
+    --titulo: #7a5a3a;
+    --texto-suave: #9d8663;
+    --borda: #e4dcd0;
+    --lateral: clamp(14px, 4.9vw, 24px);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    max-width: 480px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 0 0 calc(190px + env(safe-area-inset-bottom)); /* espaço para a barra fixa do total */
+    background: var(--fundo);
+    font-family: "Lato", "Roboto", sans-serif;
+}
+
+/* Título "Sacola" (apague este bloco se não quiser) */
+body::before {
+    content: "Sacola";
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 22px var(--lateral) 16px;
+    border-bottom: 1px solid var(--borda);
+    color: var(--marrom);
+    font-family: "Playfair Display", Georgia, serif;
+    font-style: italic;
+    font-size: clamp(28px, 8.3vw, 36px);
+}
+
+form {
+    display: block;
+    width: 100%;
+    margin: 0;
+}
+
+/* ---------- Item do carrinho ---------- */
+section {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: clamp(10px, 3.9vw, 18px);
+    width: 100%;
+    height: auto;
+    padding: 16px var(--lateral);
+    border-bottom: 1px solid var(--borda);
+}
+
+section img {
+    width: clamp(78px, 23.3vw, 112px);
+    height: auto;
+    aspect-ratio: 3 / 4;
+    margin: 0;
+    object-fit: cover;
+    border: 1px solid var(--borda);
+    background: #e9e6e1;
+    flex-shrink: 0;
+}
+
+div.text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+}
+
+div.qtde {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+/* nome */
+section h2 {
+    margin: 0 0 8px;
+    color: var(--titulo);
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: clamp(15px, 4.1vw, 18px);
+    font-weight: 700;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+
+/* preço unitário */
+h5 {
+    margin: 0 0 6px;
+    color: var(--marrom);
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: clamp(17px, 4.9vw, 21px);
+    font-weight: 400;
+    opacity: 1;
+}
+
+h5::before {
+    content: "R$ ";
+}
+
+/* total do item */
+h6 {
+    margin: 0;
+    color: var(--texto-suave);
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: clamp(13px, 3.6vw, 15px);
+    font-weight: 400;
+    opacity: 1;
+}
+
+h6::before {
+    content: "Total: ";
+}
+
+/* quantidade */
+p {
+    margin: 0;
+    padding: 8px clamp(9px, 3.4vw, 14px);
+    border: 1px solid #d9cdb8;
+    color: var(--titulo);
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: clamp(15px, 4.4vw, 18px);
+    font-weight: 700;
+    opacity: 1;
+    white-space: nowrap;
+}
+
+p::before {
+    content: "Qtd: ";
+    font-weight: 400;
+    color: var(--texto-suave);
+}
+
+/* botão Deletar */
+div.qtde input[type=submit] {
+    width: auto;
+    height: 36px;
+    margin: 0;
+    padding: 0 14px;
+    border: none;
+    border-radius: 4px;
+    background: #f1ece4;
+    color: var(--marrom);
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+div.qtde input[type=submit]:hover {
+    background: #e7dfd3;
+}
+
+/* ---------- Barra do total ---------- */
+nav {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin: 0;
+    padding: 20px var(--lateral) calc(28px + env(safe-area-inset-bottom));  /* respeita a barra do iPhone */
+    background: var(--barra);
+    border-top: 1px solid var(--borda);
+}
+
+nav h2 {
+    margin: 0;
+    color: #8f8272;
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: clamp(17px, 4.9vw, 21px);
+    font-weight: 400;
+}
+
+nav input[type=submit] {
+    width: 100%;
+    height: 52px;
+    margin: 0;
+    border: none;
+    border-radius: 2px;
+    background: var(--tan);
+    color: #fff;
+    font-family: "Lato", "Roboto", sans-serif;
+    font-size: clamp(16px, 4.4vw, 18px);
+    font-weight: 400;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+nav input[type=submit]:hover {
+    background: var(--marrom);
+}
+
+/* carrinho vazio */
+body > form > h5 {
+    padding: 40px var(--lateral);
+    text-align: center;
+    color: var(--texto-suave);
+    font-size: 18px;
+}
+
+body > form > h5::before {
+    content: "";
+}
+
+/* Samsung pequenos */
+@media (max-width: 374px) {
+    nav input[type=submit] {
+        height: 48px;
+    }
+}

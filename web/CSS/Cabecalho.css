@@ -1,0 +1,131 @@
+/*
+    Cabeçalho responsivo (iPhone, Samsung normal e Samsung Ultra).
+    Medidas-base tiradas de 412px de largura e convertidas para % / vw:
+      altura ........ 54px em 412px  (13,1vw, entre 50px e 60px)
+      logo .......... começa em 26,7% e ocupa 44,2% da largura
+      ícones ........ ficam ancorados na direita (tamanho de toque fixo)
+      menu .......... ancorado na esquerda
+*/
+
+:root {
+    --fundo: #fcfaf8;
+    --borda: #e4dcd0;
+    --marrom: #8b6644;
+    --altura: clamp(50px, 13.1vw, 60px);   /* use a MESMA fórmula no Index.css */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    background: var(--fundo);
+    -webkit-text-size-adjust: 100%;
+}
+
+section {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    height: var(--altura);
+    margin: 0 auto;
+    padding: 0;
+    background: var(--fundo);
+    border-bottom: 1px solid var(--borda);
+}
+
+/* ---------- Ícones ---------- */
+a {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;              /* área de toque maior que o ícone */
+    color: var(--marrom);
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+a svg {
+    display: block;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.dep {
+    left: 7px;
+}
+
+.dep svg {
+    width: 17px;
+    height: 12px;
+    stroke-width: 1.7;
+}
+
+.login {
+    right: 51px;
+    padding: 8px;
+}
+
+.car {
+    right: 8px;
+    padding: 8px;
+}
+
+.login svg,
+.car svg {
+    width: 22px;
+    height: 22px;
+    stroke-width: 1.6;
+}
+
+/* ---------- Logo (proporcional à largura da tela) ---------- */
+.titulo {
+    position: absolute;
+    top: 0;
+    left: 26.7%;
+    width: 44.2%;
+    height: calc(100% - 1px);
+    margin: 0;
+    object-fit: cover;
+    object-position: 30% 20%;
+    mix-blend-mode: multiply;
+}
+
+/* ---------- Ajustes por aparelho ---------- */
+
+/* Samsung pequenos (Galaxy A, S compactos) */
+@media (max-width: 374px) {
+    .login { right: 46px; }
+    .login svg,
+    .car svg { width: 20px; height: 20px; }
+}
+
+/* iPhone 12–16 padrão (390–393px) */
+@media (min-width: 375px) and (max-width: 404px) {
+    .login { right: 49px; }
+}
+
+/* Samsung S25 FE / Galaxy S normais (~412px) e Ultra (~412–440px) */
+@media (min-width: 405px) {
+    .login { right: 51px; }
+}
+
+/* iPhone Plus / Pro Max (430px+) */
+@media (min-width: 425px) {
+    .dep { left: 10px; }
+    .login { right: 56px; }
+    .car { right: 10px; }
+}
